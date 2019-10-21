@@ -13,22 +13,21 @@
   <h1 class="text-center">
     Weather App
   </h1>
-  <div class="frow">
-    <div class="col-md-1-2">
-      <div class="frow nowrap">
-        <label>
-          <input type="text" placeholder="Search City">
-        </label>
-        <button id="city-search">search</button>
+  <div class="frow-container">
+    <div class="frow gutters">
+      <div class="col-md-1-4">
+        <div class="frow nowrap">
+          <label>
+            <input id="input-search" type="text" placeholder="Search City">
+          </label>
+          <button id="city-search">search</button>
+        </div>
+        <h1>
+          previous searched cities
+        </h1>
       </div>
-      <h1>
-        major city list
-      </h1>
-    </div>
-    <div class="col-md-1-2">
-      <div class="frow">
-        <div>
-          container showing searched/wanted city info
+      <div class="col-md-3-4">
+        <div id="searched-city-info" class="">
         </div>
         <div>
           forcast: date: temp: humidity 
@@ -36,8 +35,6 @@
       </div>
     </div>
   </div>
-  <div>
-</div>
 
 
 
