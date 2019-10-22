@@ -1,3 +1,14 @@
 body {
   font-family: sans-serif;
 }
+
+.main-search-city {
+  margin: 30px;
+}
+
+
+
+
+.forecast-box {
+  margin: 3px;
+}
