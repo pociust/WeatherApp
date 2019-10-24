@@ -3,21 +3,17 @@ const endBaseURL = "&units=imperial&appid=35b0242376c730106a1ead757ba5708a";
 let forecastDisplay = $("#forecast-div");
 let previousCityDisplay = $("#previous-search-city");
 
-
 function cityUvIndex(latitude, longitude) {
-  let uvQueryURL = `api.openweathermap.org/data/2.5/uvi?appid=35b0242376c730106a1ead757ba5708a&lat=${latitude}&lon=${longitude}&cnt=5`;
-console.log('lat', latitude);
-console.log('long', longitude);
+  let uvQueryURL = `http://api.openweathermap.org/data/2.5/uvi/forecast?appid=7a5cc2c363f8a0be0f35d5a738f74ef7&lat=${latitude}&lon=${longitude}&cnt=5`;
+  console.log("lat", latitude);
+  console.log("long", longitude);
   $.ajax({
     url: uvQueryURL,
     method: "GET"
   }).then(function(uvIndex) {
-   console.log('2', uvIndex);
-
+    console.log("2", uvIndex);
   });
-};
-
-
+}
 
 function searchCity(city, lat, lng) {
   let queryURL =
@@ -38,13 +34,6 @@ function searchCity(city, lat, lng) {
   });
 }
 
-
-
-
-
-
-
-
 function cityStorage(cityName) {
   let cityList = localStorage.getItem("key")
     ? JSON.parse(localStorage.getItem("key"))
@@ -62,7 +51,8 @@ function showPreviousCity(cityList) {
       `<ul class="previous-city-display">
         <li>${cityList[i]}
         </li>
-      </ul>`);
+      </ul>`
+    );
     previousCityDisplay.prepend(showCityListDiv);
   }
 }
@@ -83,7 +73,6 @@ function displayCityInfo(response) {
     </div>`
   );
   $("#searched-city-info").html(createDiv);
-  
 }
 
 function displayForecast(response) {
