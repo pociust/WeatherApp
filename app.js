@@ -58,13 +58,20 @@ function showPreviousCity(cityList) {
 
 function displayCityInfo(response) {
   let createDiv = $(
-    `<h2>
-      ${response.city.name},<span class=small-country> ${response.city.country}</span>
+    `<div>
+      ${moment().format("MMM, D")}
+    </div>
+    <h2>
+      ${response.city.name},<span class=small-country> ${
+      response.city.country
+    }</span>
     </h2>
     <div>
       Temperature: ${response.list[0].main.temp}°F
     </div>
-    <img src="http://openweathermap.org/img/wn/${response.list[0].weather[0].icon}@2x.png">
+    <img src="http://openweathermap.org/img/wn/${
+      response.list[0].weather[0].icon
+    }@2x.png">
     <div>
       Humidity: ${response.list[0].main.humidity}%
     </div>
@@ -75,18 +82,31 @@ function displayCityInfo(response) {
   $("#searched-city-info").html(createDiv);
 }
 
+// function dayOfTheWeekForcast() {
+//   for (j = 1; j < 6; j++) {
+//     return momentJOfTheWeek;
+//     displayForecast(dayOfTheWeek);
+//   }
+// }
+
 function displayForecast(response) {
   for (i = 5; i < response.list.length; i += 8) {
     forecastDiv = $(
       `<div class="col-md-1-5">
         <div class="forecast-box shadow-light height-100 p-5">
+          <div>${moment()
+            .add(i, "days")
+            .format("MMM, D")}
+          </div>
           <h2>
             ${response.city.name}
           </h2>
           <div>
             Temperature: ${response.list[i].main.temp}°F
           </div>
-          <img src="http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">
+          <img src="http://openweathermap.org/img/wn/${
+            response.list[i].weather[0].icon
+          }@2x.png">
           <div>
             Humidity: ${response.list[i].main.humidity}%
           </div>
@@ -103,7 +123,7 @@ function displayForecast(response) {
 $("#city-search").submit(function(event) {
   event.preventDefault();
   let city = $(":text").val();
-
+  // dayOfTheWeekForcast();
   searchCity(city);
 });
 

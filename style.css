@@ -33,3 +33,8 @@ li:hover {
 .forecast-box {
   margin: 3px;
 }
+
+img {
+  width: 70px;
+  height: 70px;
+}
