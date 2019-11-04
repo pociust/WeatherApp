@@ -5,8 +5,6 @@ let previousCityDisplay = $("#previous-search-city");
 
 function cityUvIndex(latitude, longitude) {
   let uvQueryURL = `http://api.openweathermap.org/data/2.5/uvi/forecast?appid=7a5cc2c363f8a0be0f35d5a738f74ef7&lat=${latitude}&lon=${longitude}&cnt=5`;
-  console.log("lat", latitude);
-  console.log("long", longitude);
   $.ajax({
     url: uvQueryURL,
     method: "GET"
@@ -16,6 +14,8 @@ function cityUvIndex(latitude, longitude) {
 }
 
 function searchCity(city, lat, lng) {
+  forecastDisplay.html("");
+  previousCityDisplay.html("");
   let queryURL =
     forecastURL + (city ? `q=${city}` : `lat=${lat}&lon=${lng}`) + endBaseURL;
 
@@ -35,23 +35,22 @@ function searchCity(city, lat, lng) {
 }
 
 function cityStorage(cityName) {
-  let cityList = localStorage.getItem("key")
-    ? JSON.parse(localStorage.getItem("key"))
+  let cityList = localStorage.getItem("cityList")
+    ? JSON.parse(localStorage.getItem("cityList"))
     : [];
 
   cityList = cityList.concat(cityName);
-  showPreviousCity(cityList);
-
-  localStorage.setItem("key", JSON.stringify(cityList));
+  let nonDuplicateCity = new Set(cityList);
+  showPreviousCity([...nonDuplicateCity]);
+  localStorage.setItem("cityList", JSON.stringify([...nonDuplicateCity]));
 }
 
 function showPreviousCity(cityList) {
+  console.log(cityList);
   for (i = 0; i < cityList.length; i++) {
     showCityListDiv = $(
-      `<ul class="previous-city-display">
-        <li>${cityList[i]}
-        </li>
-      </ul>`
+      `<li class="clickable" onclick="searchCity('${cityList[i]}')">${cityList[i]}
+      </li>`
     );
     previousCityDisplay.prepend(showCityListDiv);
   }
@@ -65,6 +64,7 @@ function displayCityInfo(response) {
     <div>
       Temperature: ${response.list[0].main.temp}°F
     </div>
+    <img src="http://openweathermap.org/img/wn/${response.list[0].weather[0].icon}@2x.png">
     <div>
       Humidity: ${response.list[0].main.humidity}%
     </div>
@@ -78,20 +78,23 @@ function displayCityInfo(response) {
 function displayForecast(response) {
   for (i = 5; i < response.list.length; i += 8) {
     forecastDiv = $(
-      `<div class="forecast-box shadow-light p-5">
-        <h2>
-          ${response.city.name}
-        </h2>
-        <div>
-          Temperature: ${response.list[i].main.temp}°F
+      `<div class="col-md-1-5">
+        <div class="forecast-box shadow-light height-100 p-5">
+          <h2>
+            ${response.city.name}
+          </h2>
+          <div>
+            Temperature: ${response.list[i].main.temp}°F
+          </div>
+          <img src="http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">
+          <div>
+            Humidity: ${response.list[i].main.humidity}%
+          </div>
+          <div>
+            Wind: ${response.list[i].wind.speed}MPH
+          </div>
         </div>
-        <div>
-          Humidity: ${response.list[i].main.humidity}%
-        </div>
-        <div>
-          Wind: ${response.list[i].wind.speed}MPH
-        </div>
-    </div>`
+      </div>`
     );
     forecastDisplay.append(forecastDiv);
   }
@@ -100,8 +103,7 @@ function displayForecast(response) {
 $("#city-search").submit(function(event) {
   event.preventDefault();
   let city = $(":text").val();
-  forecastDisplay.html("");
-  previousCityDisplay.html("");
+
   searchCity(city);
 });
 

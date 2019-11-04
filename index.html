@@ -19,22 +19,23 @@
     <div class="frow-container">
       <div class="frow gutters">
         <div class="col-md-1-4">
-          <div class="frow nowrap">
-            <form id="city-search">
-              <label>
+          <form id="city-search">
+            <div class="frow nowrap">
+              <label class="m-0">
                 <input
-                  id="input-search"
                   type="text"
                   placeholder="Search City"
                 />
               </label>
-            </form>
-          </div>
-          <div id="previous-search-city"></div>
+              <button class="weather-button">Search</button>
+            </div>
+          </form>
+            <ul id="previous-search-city">
+            </ul>
         </div>
         <div class="col-md-3-4">
           <div id="searched-city-info" class="main-search-city"></div>
-          <div id="forecast-div" class="frow row-between"></div>
+          <div id="forecast-div" class="frow items-stretch "></div>
         </div>
       </div>
     </div>
