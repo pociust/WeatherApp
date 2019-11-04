@@ -60,7 +60,7 @@ function showPreviousCity(cityList) {
 function displayCityInfo(response) {
   let createDiv = $(
     `<h2>
-      ${response.city.name}
+      ${response.city.name},<span class=small-country> ${response.city.country}</span>
     </h2>
     <div>
       Temperature: ${response.list[0].main.temp}°F
@@ -78,7 +78,7 @@ function displayCityInfo(response) {
 function displayForecast(response) {
   for (i = 5; i < response.list.length; i += 8) {
     forecastDiv = $(
-      `<div class="forecast-box shadow-light">
+      `<div class="forecast-box shadow-light p-5">
         <h2>
           ${response.city.name}
         </h2>
@@ -97,7 +97,8 @@ function displayForecast(response) {
   }
 }
 
-$("#city-search").on("click", function() {
+$("#city-search").submit(function(event) {
+  event.preventDefault();
   let city = $(":text").val();
   forecastDisplay.html("");
   previousCityDisplay.html("");

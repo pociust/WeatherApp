@@ -2,23 +2,21 @@ body {
   font-family: sans-serif;
 }
 
-
 .previous-city-display {
-list-style-type: none;
+  list-style-type: none;
 }
 
 li:hover {
   background-color: #e5f8f8;
 }
 
-
+.small-country {
+  font-size: 12px;
+}
 
 .main-search-city {
   margin: 30px;
 }
-
-
-
 
 .forecast-box {
   margin: 3px;
