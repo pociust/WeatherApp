@@ -23,10 +23,9 @@ function searchCity(city, lat, lng) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    console.log("1", response);
     let latitude = response.city.coord.lat;
     let longitude = response.city.coord.lon;
-
     cityUvIndex(latitude, longitude);
     displayCityInfo(response);
     displayForecast(response);
@@ -79,18 +78,12 @@ function displayCityInfo(response) {
       Wind: ${response.list[0].wind.speed}MPH
     </div>`
   );
+
   $("#searched-city-info").html(createDiv);
 }
 
-// function dayOfTheWeekForcast() {
-//   for (j = 1; j < 6; j++) {
-//     return momentJOfTheWeek;
-//     displayForecast(dayOfTheWeek);
-//   }
-// }
-
 function displayForecast(response) {
-  for (i = 5; i < response.list.length; i += 8) {
+  for (i = 0; i < 5; i++) {
     forecastDiv = $(
       `<div class="col-md-1-5">
         <div class="forecast-box shadow-light height-100 p-5">
@@ -102,20 +95,21 @@ function displayForecast(response) {
             ${response.city.name}
           </h2>
           <div>
-            Temperature: ${response.list[i].main.temp}°F
+            Temperature: ${response.list[5 + 8 * i].main.temp}°F
           </div>
           <img src="http://openweathermap.org/img/wn/${
-            response.list[i].weather[0].icon
+            response.list[5 + 8 * i].weather[0].icon
           }@2x.png">
           <div>
-            Humidity: ${response.list[i].main.humidity}%
+            Humidity: ${response.list[5 + 8 * i].main.humidity}%
           </div>
           <div>
-            Wind: ${response.list[i].wind.speed}MPH
+            Wind: ${response.list[5 + 8 * i].wind.speed}MPH
           </div>
         </div>
       </div>`
     );
+    console.log("main", response.list[5 + 8 * i].main);
     forecastDisplay.append(forecastDiv);
   }
 }
@@ -123,7 +117,6 @@ function displayForecast(response) {
 $("#city-search").submit(function(event) {
   event.preventDefault();
   let city = $(":text").val();
-  // dayOfTheWeekForcast();
   searchCity(city);
 });
 
