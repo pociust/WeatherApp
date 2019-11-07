@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 #previous-search-city {
@@ -37,4 +37,12 @@ li:hover {
 img {
   width: 70px;
   height: 70px;
+}
+
+/* .uvindex-display {
+  display: none;
+} */
+
+img:hover .uvindex-display {
+  display: block;
 }

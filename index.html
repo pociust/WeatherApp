@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/frow@3/dist/frow.min.css"
     />
@@ -22,20 +26,20 @@
           <form id="city-search">
             <div class="frow nowrap">
               <label class="m-0">
-                <input
-                  type="text"
-                  placeholder="Search City"
-                />
+                <input type="text" placeholder="Search City" />
               </label>
               <button class="weather-button">Search</button>
             </div>
           </form>
-            <ul id="previous-search-city">
-            </ul>
+          <ul id="previous-search-city"></ul>
         </div>
         <div class="col-md-3-4">
           <div id="searched-city-info" class="main-search-city"></div>
           <div id="forecast-div" class="frow items-stretch "></div>
+          <div
+            id="uvindex-div"
+            class="frow items-stretch "
+          ></div>
         </div>
       </div>
     </div>

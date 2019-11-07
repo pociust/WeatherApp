@@ -1,6 +1,7 @@
 const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?";
 const endBaseURL = "&units=imperial&appid=35b0242376c730106a1ead757ba5708a";
 let forecastDisplay = $("#forecast-div");
+let uvIndexDisplay = $("#uvindex-div");
 let previousCityDisplay = $("#previous-search-city");
 
 function cityUvIndex(latitude, longitude) {
@@ -9,13 +10,15 @@ function cityUvIndex(latitude, longitude) {
     url: uvQueryURL,
     method: "GET"
   }).then(function(uvIndex) {
-    console.log("2", uvIndex);
+    console.log("uvindex", uvIndex);
+    displayUvIndex(uvIndex);
   });
 }
 
 function searchCity(city, lat, lng) {
   forecastDisplay.html("");
   previousCityDisplay.html("");
+  uvIndexDisplay.html("");
   let queryURL =
     forecastURL + (city ? `q=${city}` : `lat=${lat}&lon=${lng}`) + endBaseURL;
 
@@ -23,7 +26,7 @@ function searchCity(city, lat, lng) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log("1", response);
+    console.log("response", response);
     let latitude = response.city.coord.lat;
     let longitude = response.city.coord.lon;
     cityUvIndex(latitude, longitude);
@@ -45,7 +48,6 @@ function cityStorage(cityName) {
 }
 
 function showPreviousCity(cityList) {
-  console.log(cityList);
   for (i = 0; i < cityList.length; i++) {
     showCityListDiv = $(
       `<li class="clickable" onclick="searchCity('${cityList[i]}')">${cityList[i]}
@@ -83,12 +85,12 @@ function displayCityInfo(response) {
 }
 
 function displayForecast(response) {
-  for (i = 0; i < 5; i++) {
+  for (var i = 0; i < 5; i++) {
     forecastDiv = $(
       `<div class="col-md-1-5">
         <div class="forecast-box shadow-light height-100 p-5">
           <div>${moment()
-            .add(i, "days")
+            .add(i < 1 ? 1 : i + 1, "days")
             .format("MMM, D")}
           </div>
           <h2>
@@ -97,20 +99,30 @@ function displayForecast(response) {
           <div>
             Temperature: ${response.list[5 + 8 * i].main.temp}°F
           </div>
-          <img src="http://openweathermap.org/img/wn/${
+          <img class="weather-icons" src="http://openweathermap.org/img/wn/${
             response.list[5 + 8 * i].weather[0].icon
           }@2x.png">
           <div>
             Humidity: ${response.list[5 + 8 * i].main.humidity}%
           </div>
-          <div>
+          <div class="UVI-add${[i]}">
             Wind: ${response.list[5 + 8 * i].wind.speed}MPH
           </div>
         </div>
       </div>`
     );
-    console.log("main", response.list[5 + 8 * i].main);
     forecastDisplay.append(forecastDiv);
+  }
+}
+
+function displayUvIndex(uvIndex) {
+  for (var u = 1; u < 6; u++) {
+    uVIndexDiv = $(`
+      <div>
+        UV Index: ${uvIndex[u].value} of 10
+      </div>`);
+    $(`.UVI-add${[u]}`).append(uVIndexDiv[u]);
+    console.log(uvIndex[u].value);
   }
 }
 
