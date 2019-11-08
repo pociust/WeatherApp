@@ -78,6 +78,8 @@ function displayCityInfo(response) {
     </div>
     <div>
       Wind: ${response.list[0].wind.speed}MPH
+    </div>
+    <div class="city-uv">
     </div>`
   );
 
@@ -105,8 +107,10 @@ function displayForecast(response) {
           <div>
             Humidity: ${response.list[5 + 8 * i].main.humidity}%
           </div>
-          <div class="UVI-add${[i]}">
+          <div>
             Wind: ${response.list[5 + 8 * i].wind.speed}MPH
+          </div>
+          <div class="UVI-add${[i]}">
           </div>
         </div>
       </div>`
@@ -121,9 +125,13 @@ function displayUvIndex(uvIndex) {
       <div>
         UV Index: ${uvIndex[u].value} of 10
       </div>`);
-    $(`.UVI-add${[u]}`).append(uVIndexDiv[u]);
-    console.log(uvIndex[u].value);
+    $(`.UVI-add${u - 1}`).prepend(uVIndexDiv);
   }
+  citySearchUvIndex = $(`
+      <div>
+        UV Index: ${uvIndex[0].value} of 10
+      </div>`);
+  $(`.city-uv`).prepend(citySearchUvIndex);
 }
 
 $("#city-search").submit(function(event) {
