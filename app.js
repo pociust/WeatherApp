@@ -10,7 +10,6 @@ function cityUvIndex(latitude, longitude) {
     url: uvQueryURL,
     method: "GET"
   }).then(function(uvIndex) {
-    console.log("uvindex", uvIndex);
     displayUvIndex(uvIndex);
   });
 }
@@ -26,7 +25,6 @@ function searchCity(city, lat, lng) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log("response", response);
     let latitude = response.city.coord.lat;
     let longitude = response.city.coord.lon;
     cityUvIndex(latitude, longitude);
@@ -95,7 +93,7 @@ function displayForecast(response) {
             .add(i < 1 ? 1 : i + 1, "days")
             .format("MMM, D")}
           </div>
-          <h2>
+          <h2 class="city-text-overflow">
             ${response.city.name}
           </h2>
           <div>

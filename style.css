@@ -22,6 +22,15 @@ li:hover {
   background-color: #e5f8f8;
 }
 
+h2 {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.city-text-overflow {
+  text-overflow: ellipsis;
+}
+
 .small-country {
   font-size: 12px;
 }
@@ -37,12 +46,4 @@ li:hover {
 img {
   width: 70px;
   height: 70px;
-}
-
-/* .uvindex-display {
-  display: none;
-} */
-
-img:hover .uvindex-display {
-  display: block;
 }
