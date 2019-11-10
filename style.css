@@ -1,5 +1,33 @@
+:root {
+  --theme-color: #727272;
+  --theme-color-light: #eee;
+  --theme-color-dark: #333;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+header {
+  height: 70px;
+  font-size: 30px;
+  font-weight: 700;
+  padding: 0 25px;
+  background-color: var(--theme-color-light);
+  color: var(--theme-color-dark);
+}
+
+#content {
+  padding: 15px 25px 25px;
+}
+
+.search-button {
+  margin-left: 10px;
+  background: none;
+  color: #fff;
+  border: 2px solid var(--theme-color);
+  background-color: var(--theme-color);
 }
 
 #previous-search-city {
@@ -8,18 +36,12 @@ body {
 }
 
 #previous-search-city li {
-  padding: 5px 0;
-}
-
-.weather-button {
-  margin-left: 10px;
-  background: none;
-  color: #333;
-  border: 0;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 li:hover {
-  background-color: #e5f8f8;
+  background-color: var(--theme-color-light);
 }
 
 h2 {
@@ -36,14 +58,41 @@ h2 {
 }
 
 .main-search-city {
-  margin: 30px;
+  margin: 30px 0;
 }
 
 .forecast-box {
-  margin: 3px;
+  margin-right: 10px;
 }
 
-img {
-  width: 70px;
-  height: 70px;
+.card-date {
+  width: 100%;
+  background-color: var(--theme-color);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 23px;
+  margin-bottom: 4px;
+  padding: 8px 0;
+}
+
+.card-temperature {
+  font-weight: 700;
+  font-size: 45px;
+}
+
+.card-info {
+  line-height: 150%;
+  font-size: 17px;
+  color: var(--theme-color-dark);
+}
+
+.card-info span {
+  font-weight: 700;
+  color: #333;
+}
+
+img.weather-icons {
+  width: 90px;
+  height: 90px;
 }

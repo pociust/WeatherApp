@@ -65,10 +65,10 @@ function displayCityInfo(response) {
       response.city.country
     }</span>
     </h2>
-    <div>
-      Temperature: ${response.list[0].main.temp}°F
+    <div class="card-temperature">
+      ${Math.round(response.list[0].main.temp)}°F
     </div>
-    <img src="http://openweathermap.org/img/wn/${
+    <img class="weather-icons" src="http://openweathermap.org/img/wn/${
       response.list[0].weather[0].icon
     }@2x.png">
     <div>
@@ -88,24 +88,28 @@ function displayForecast(response) {
   for (var i = 0; i < 5; i++) {
     forecastDiv = $(
       `<div class="col-md-1-5">
-        <div class="forecast-box shadow-light height-100 p-5">
-          <div>${moment()
-            .add(i < 1 ? 1 : i + 1, "days")
-            .format("MMM, D")}
+        <div class="forecast-box shadow-light">
+          <div class="card-date">
+            ${moment()
+              .add(i < 1 ? 1 : i + 1, "days")
+              .format("MMM D")}
           </div>
-          <div>
-            Temperature: ${response.list[5 + 8 * i].main.temp}°F
-          </div>
-          <img class="weather-icons" src="http://openweathermap.org/img/wn/${
-            response.list[5 + 8 * i].weather[0].icon
-          }@2x.png">
-          <div>
-            Humidity: ${response.list[5 + 8 * i].main.humidity}%
-          </div>
-          <div>
-            Wind: ${response.list[5 + 8 * i].wind.speed}MPH
-          </div>
-          <div class="UVI-add${[i]}">
+          <div class="p-15">
+            <div class="frow row-center nowrap">
+              <img class="weather-icons" src="http://openweathermap.org/img/wn/${
+                response.list[5 + 8 * i].weather[0].icon
+              }@2x.png">
+              <div class="card-temperature shrink-0">
+                ${Math.round(response.list[5 + 8 * i].main.temp)}°F
+              </div>
+            </div>
+            <div class="card-info">
+              <span>Humidity</span> ${response.list[5 + 8 * i].main.humidity}%
+            </div>
+            <div class="card-info">
+              <span>Wind</span> ${response.list[5 + 8 * i].wind.speed}MPH
+            </div>
+            <div class="UVI-add${[i]} card-info"></div>
           </div>
         </div>
       </div>`
@@ -118,13 +122,13 @@ function displayUvIndex(uvIndex) {
   for (var u = 1; u < 6; u++) {
     uVIndexDiv = $(`
       <div>
-        UV Index: ${uvIndex[u].value} of 10
+        <span>UV Index</span> ${uvIndex[u].value} of 10
       </div>`);
     $(`.UVI-add${u - 1}`).prepend(uVIndexDiv);
   }
   citySearchUvIndex = $(`
       <div>
-        UV Index: ${uvIndex[0].value} of 10
+        <span>UV Index:</span> ${uvIndex[0].value} of 10
       </div>`);
   $(`.city-uv`).prepend(citySearchUvIndex);
 }
