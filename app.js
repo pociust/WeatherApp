@@ -1,8 +1,45 @@
 const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?";
 const endBaseURL = "&units=imperial&appid=35b0242376c730106a1ead757ba5708a";
+const themes = {
+  black: {
+    main: "#727272",
+    light: "#eee",
+    dark: "#333"
+  },
+  green: {
+    main: "#00897B",
+    light: "#B2DFDB",
+    dark: "#00695C"
+  },
+  purple: {
+    main: "#5E35B1",
+    light: "#9575CD",
+    dark: "#4527A0"
+  },
+  yellow: {
+    main: "#FB8C00",
+    light: "#FFCC80",
+    dark: "#EF6C00"
+  }
+};
 let forecastDisplay = $("#forecast-div");
 let uvIndexDisplay = $("#uvindex-div");
 let previousCityDisplay = $("#previous-search-city");
+
+function changeTheme(color) {
+  document.documentElement.style.setProperty(
+    "--theme-color",
+    themes[color].main
+  );
+  document.documentElement.style.setProperty(
+    "--theme-color-light",
+    themes[color].light
+  );
+  document.documentElement.style.setProperty(
+    "--theme-color-dark",
+    themes[color].dark
+  );
+}
 
 function cityUvIndex(latitude, longitude) {
   let uvQueryURL = `http://api.openweathermap.org/data/2.5/uvi/forecast?appid=7a5cc2c363f8a0be0f35d5a738f74ef7&lat=${latitude}&lon=${longitude}&cnt=5`;

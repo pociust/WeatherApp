@@ -17,6 +17,27 @@ header {
   background-color: var(--theme-color-light);
   color: var(--theme-color-dark);
 }
+.theme-button {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  /* border: 1px solid #fff; */
+  margin-left: 10px;
+}
+
+.theme-button.purple {
+  background-color: #5e35b1;
+}
+.theme-button.green {
+  background-color: #00897b;
+}
+.theme-button.yellow {
+  background-color: #FB8C00;
+}
+
+.theme-button.black {
+  background-color: #333;
+}
 
 #content {
   padding: 15px 25px 25px;
