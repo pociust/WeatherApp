@@ -2,6 +2,7 @@
   --theme-color: #727272;
   --theme-color-light: #eee;
   --theme-color-dark: #333;
+  --animation-speed: 0.8s;
 }
 
 body {
@@ -16,6 +17,8 @@ header {
   padding: 0 25px;
   background-color: var(--theme-color-light);
   color: var(--theme-color-dark);
+  transition: background-color var(--animation-speed),
+    color var(--animation-speed);
 }
 .theme-button {
   height: 25px;
@@ -32,7 +35,7 @@ header {
   background-color: #00897b;
 }
 .theme-button.yellow {
-  background-color: #FB8C00;
+  background-color: #fb8c00;
 }
 
 .theme-button.black {
@@ -49,6 +52,8 @@ header {
   color: #fff;
   border: 2px solid var(--theme-color);
   background-color: var(--theme-color);
+  transition: background-color var(--animation-speed),
+    border-color var(--animation-speed);
 }
 
 #previous-search-city {
@@ -63,6 +68,7 @@ header {
 
 li:hover {
   background-color: var(--theme-color-light);
+  transition: background-color var(--animation-speed);
 }
 
 h2 {
@@ -95,6 +101,7 @@ h2 {
   font-size: 23px;
   margin-bottom: 4px;
   padding: 8px 0;
+  transition: background-color var(--animation-speed);
 }
 
 .card-temperature {
@@ -106,6 +113,7 @@ h2 {
   line-height: 150%;
   font-size: 17px;
   color: var(--theme-color-dark);
+  transition: color var(--animation-speed);
 }
 
 .card-info span {
