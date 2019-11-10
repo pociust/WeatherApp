@@ -93,9 +93,6 @@ function displayForecast(response) {
             .add(i < 1 ? 1 : i + 1, "days")
             .format("MMM, D")}
           </div>
-          <h2 class="city-text-overflow">
-            ${response.city.name}
-          </h2>
           <div>
             Temperature: ${response.list[5 + 8 * i].main.temp}°F
           </div>
